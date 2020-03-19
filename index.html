@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>CodePen - My Sandbox - CSS Grid</title>
+  <html lang="en-US">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="My Sandbox for learning CSS Grid">
+<title>CSS Grid</title>
+
+<link rel="stylesheet" href="./style.css">
+
+</head>
+<body>
+<!--My sandbox for learning the ins and outs of CSS Gridbox-->
+
+<main class="big-box">
+  <h1>This is me getting down and dirty with CSS Grid</h1>
+  <section class="box">
+    <h2>CSS Grid properties</h2>
+    <ul>
+      <li>grid-template-columns</li>
+      <li>grid-template-rows</li>
+      <li>grid-template</li>
+      <li>grid-gap</li>
+      <li>grid-row-start / grid-row-end</li>
+      <li>grid-column-start / grid-column-end</li>
+      <li>grid-area</li>
+    </ul>
+  </section>
+  <section class="box">
+    <h2>First things first - Create the grid</h2>
+    <p>A grid is created by specifying the number of rows and columns.</p>
+    <p>This example is for a 3 column x 2 row grid</p>
+    <ul class="box-list">
+      <li>
+        <h3>Method 1 - using set measurements</h3>
+        <pre>
+        .container {
+          display: grid;
+          grid-template-columns: 10% auto 100px;
+          grid-template-rows: 50px 50px;
+          grid-gap: 3px;
+        }
+        </pre>
+        <p>Note: minmax can also be used for when columns/rows resize</p>
+        <pre>
+        .container {
+          display: grid;
+          grid-template-columns: 100px minmax(100px, 500px) 100px;
+          grid-template-rows: 50px 50px;
+          grid-gap: 3px;
+        }
+</pre>
+      </li>
+      <li>
+        <h3>Method 2 - using fractions</h3>
+        <pre>
+        .container {
+          display: grid;
+          grid-template-columns: 1fr 1fr 1fr;
+          grid-template-rows: 50px 50px;
+          grid-gap: 3px;
+        }
+        </pre>
+      </li>
+      <li>
+        <h3>Method 3 - using repeat</h3>
+        <pre>
+        .container {
+          display: grid;
+          grid-template-columns: 50px repeat (3, 1fr);
+          grid-template-rows: repeat (2, 1fr)
+          grid-gap: 3px;
+        }
+        </pre>
+      </li>
+      <li>
+        <h3>Method 4 - auto rows</h3>
+        <pre>
+        .container {
+          display: grid;
+          grid-template-columns: 50px repeat (3, 1fr);
+          grid-auto-rows: 100px;
+          grid-gap: 3px;
+        }
+        </pre>
+        <pre>
+        .container {
+          display: grid;
+          grid-template-columns: 50px repeat (3, 1fr);
+          grid-auto-rows: minmax(100px, auto);
+          grid-gap: 3px;
+        }
+        </pre>
+      </li>
+      <li>
+        <h3>Method 5 - grid template</h3>
+        <p>grid-template is shorthand for grid-template-rows and grid-template-columns(rows/columns)</p>
+        <pre>
+        .container {
+          display: grid;
+          grid-template: repeat(2, 50px) / repeat(3, 1fr); 
+          grid-gap: 3px;
+        }
+        </pre>
+      </li>
+      <li>
+        <h3>Method 6 - auto-fill</h3>
+        <p>For this example the grid will create as many 200px columns that will fit in container
+        </p>
+        <pre>
+        .container {
+          display: grid;
+          grid-template-columns: repeat(auto-fill, 200px);  
+          grid-gap: 3px;
+        }
+        </pre>
+        <p>For this example the grid will create as many 200px columns that will fit in container with remaining space shared
+        </p>
+        <pre>
+        .container {
+          display: grid;
+          grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));  
+          grid-gap: 3px;
+        }
+        </pre>
+        <p>Auto-fill will add extra columns with no content – shows as blank space</p>
+      </li>
+      <li>
+        <h3>Method 7 - auto-fit</h3>
+        <p>For this example the grid will create as many 200px columns that will fit in container
+        </p>
+        <pre>
+        .container {
+          display: grid;
+          grid-template-columns: (repeat(auto-fit, minmax (100px), 1fr);  
+          grid-gap: 3px;
+        }
+        </pre>
+      </li>
+      <li>
+        <h3>Method 8 - naming grid lines</h3>
+        <p>Yet another method of doing the same thing…for larger projects easier than going by row start numbers, etc (also main-start and menu-start could both be assigned to same grid area. </p>
+        <pre>
+        .container {
+          display: grid;
+          grid-template-columns: [main-start] 1fr [content-start] 1fr [content-end] 1fr [main-end];
+          grid-template-rows: [main-start] 100px [content-start] 100px [content-end] 100px [main-end];
+          grid-gap: 3px;
+        }
+        </pre>
+        <p>Elements are then positioned by defining the row/column start/end</p>
+        <pre>
+              .item {
+                grid-column-start: main-start;
+                grid-row-start: main-start;
+                grid-row-end: main-end
+              }
+</pre>
+      </li>
+    </ul>
+  </section>
+  <section class="box">
+    <h2>Second things secondly - Content in the grid</h2>
+    <p>Items are aligned within their assigned grid area
+    </p>
+    <ul>
+      <li>
+        <h3>Self alignment</h3>
+        <pre>
+        .item {
+          align-self: stretch;
+          justify-self: center;
+        }
+        </pre>
+        <p>Properties include:</p>
+        <ul>
+          <li>auto</li>
+          <li>normal</li>
+          <li>start</li>
+          <li>end</li>
+          <li>center</li>
+          <li>stretch</li>
+          <li>baseline</li>
+          <li>first baseline</li>
+          <li>last baseline</li>
+        </ul>
+      </li>
+      <li>
+        <h3>Container alignment</h3>
+        <p>Items are aligned on grid tracks within their assigned grid area</p>
+        <pre>
+        .item {
+          align-self: stretch;
+          justify-self: center;
+        }
+        </pre>
+        <p>Properties include:</p>
+        <ul>
+          <li>normal</li>
+          <li>start</li>
+          <li>end</li>
+          <li>center</li>
+          <li>stretch</li>
+          <li>space-around</li>
+          <li>space-between</li>
+          <li>space-evenly</li>
+          <li>baseline</li>
+          <li>first baseline</li>
+          <li>last baseline</li>
+        </ul>
+    </ul>
+    <p>align-items (container) vs align-self (item) and justify-items (container) vs justify-self (item)</p>
+  </section>
+  <section class="box">
+    <h3>An example of laying out article using grid</h3>
+    <pre>
+    article {
+      display: grid;
+      grid-template-columns: 80px 1fr 80px;
+      }
+
+    article > * {
+    grid-column: 2; //start at line 2 – gives border effect
+    min-width: 0; //if this is not set it looks off
+    }
+
+    article > figure {
+      grid-column: 1 / -1; //this takes whole width
+      margin: 20px 0; //using full row so need a bit of a margin
+    }
+
+    article> .aside {
+      grid-column: 3; //setting it in the last column looks like an aside/side note
+      color: #666; //distinguish aside
+      font-size: 0.8em; //smaller text
+   }
+   </pre>
+  </section>
+</main>
+  
+</body>
+</html>

@@ -1,0 +1,50 @@
+/*===========
+Basic Styles 
+============*/
+html {
+  scroll-behavior: smooth;
+  margin: 0;
+  padding: 0;
+}
+
+/*set global styles*/
+body * {
+  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+}
+
+/*fallback fonts - never shall Times New Roman be seen again!!!*/
+h1,
+h2,
+h3,
+p,
+a,
+li {
+  font-family: Verdana, sans-serif;
+}
+
+/*======
+Layout
+=======*/
+
+/*big box will be main contianer for page with all the little sandbox boxes inside it*/
+
+.big-box {
+  width: 80%;
+  margin: auto;
+  border: solid black 2px;
+}
+
+.box {
+  margin: 0 auto;
+  padding: 5px 10px;
+}
+
+h1 {
+  text-align: center;
+}
+
+/*============
+Example boxes
+============*/
